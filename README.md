@@ -1,12 +1,22 @@
-## 🧬 Projeto: BioStats - Monitor de Saúde
+# 🧬 BioStats - Monitor Vital
 
-### 📈 Progresso do Projeto
-![Progresso do Projeto](https://geps.dev/progress/0)
+O **BioStats** é uma aplicação de linha de comando (CLI) desenvolvida em **Ruby** para auxiliar no monitoramento de métricas vitais básicas. O projeto foi construído focando em boas práticas de programação, separação de responsabilidades e experiência do usuário no terminal.
 
-Monitor biométrico que utiliza a lógica de Unidade Base para calcular métricas vitais e saúde preventiva.
+## 🚀 Funcionalidades
+- **Cálculo de IMC:** Índice de Massa Corporal com classificação automática.
+- **Cálculo de TMB:** Taxa Metabólica Basal usando a fórmula de Mifflin-St Jeor.
+- **Entrada Blindada:** Tratamento de erros (begin/rescue) para garantir que letras não quebrem os cálculos.
+- **Interface Visual:** Relatórios coloridos via sequências ANSI para fácil interpretação.
 
-### 🛠️ O que ele reforça:
-* **Cálculos Matemáticos:** Implementação de fórmulas complexas como Harris-Benedict (taxa metabólica) e IMC.
-* **Inputs Validados:** Refinamento de tratamento de erros (`begin/rescue`) para garantir entradas numéricas precisas de peso e altura.
-* **Relatórios Dinâmicos:** Geração de diagnósticos estilizados com cores ANSI, variando conforme a gravidade dos resultados (ex: Alerta em vermelho para IMC fora do padrão).
+## 🛠️ Tecnologias Utilizadas
+- **Linguagem:** Ruby
+- **Versionamento:** Git & GitHub
+- **Arquitetura:** Modular (Módulos separados para Lógica e Input)
 
+## 📖 Aprendizados (Método Feynman)
+Durante o desenvolvimento deste projeto, foram consolidados conceitos como:
+1. **Módulos:** Encapsulamento de métodos para evitar poluição do escopo global.
+2. **Sanitização de Dados:** Uso de `.gsub`, `.strip` e `.upcase` para tratar strings.
+3. **Controle de Fluxo:** Implementação de `loop do` e `case/when` para lógica de decisão.
+
+---
