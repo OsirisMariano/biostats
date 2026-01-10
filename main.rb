@@ -38,3 +38,22 @@ puts "Gasto Real:       #{gasto_real} kcal/dia"
 puts "Água Diária:      #{info_agua[:litros]}L (~#{info_agua[:copos]} copos de 250ml)"
 puts "="*40
 puts "Status: Processamento concluído com sucesso."
+
+print "\nDeseja salvar o relatório em um arquivo? [S/N]"
+resposta = gets.chomp.upcase
+
+if resposta == "S"
+  classificacao_limpa = classificacao.gsub(/\e\[\d+m/, "").gsub(/\e\[0m/, "")
+  texto_para_salvar = <<~TEXTO
+  IMC:              #{valor_imc} (#{classificacao})
+  TMB (Gasto Base): #{valor_tmb.round(2)} kcal/dia
+  Gasto Real:       #{gasto_real} kcal/dia
+  Agua Diária:      #{info_agua[:litros]}L
+  TEXTO
+
+  require_relative 'escritorio'
+  Escritorio.salvar(texto_para_salvar)
+  puts "Relatório salvo com sucesso em 'relatorio.txt'"
+else
+  puts "O relatório não foi salvo."
+end
