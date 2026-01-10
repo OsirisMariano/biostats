@@ -1,0 +1,8 @@
+
+========================================
+RELATORIO GERADO EM 10/01/2026 06:51
+IMC:              24.22 ([32mPeso normal[0m)
+TMB (Gasto Base): 1552.5 kcal/dia
+Gasto Real:       2949.75 kcal/dia
+Agua Diária:      2.45L
+========================================
