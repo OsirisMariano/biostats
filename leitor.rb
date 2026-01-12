@@ -1,5 +1,3 @@
-# leitor.rb
-
 module Leitor
   # Captura números com tratamento de erro
   def self.ler_numero(mensagem)
@@ -30,4 +28,17 @@ module Leitor
       end
     end
   end
+
+  def self.coletar_dados_pessoais
+    puts "\n --- CADASTRO DE CLIENTE --- "
+    print "Nome completo: "
+    nome = gets.chomp
+    print "Telefone: "
+    telefone = gets.chomp
+    print "Endereço: "
+    endereco = gets.chomp
+
+    {nome: nome, telefone: telefone, endereco: endereco}
+  end
 end
+
