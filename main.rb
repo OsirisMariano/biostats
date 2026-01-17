@@ -11,7 +11,8 @@ loop do
   puts "="*30
   puts "[1] Novo Cálculo"
   puts "[2] Ver Histórico"
-  puts "[3] Sair"
+  puts "[3] Buscar cliente por nome"
+  puts "[4] Sair"
   print "\nEscolha uma opção: "
   opcao = gets.chomp
 
@@ -65,7 +66,7 @@ loop do
       TEXTO
 
       Escritorio.salvar(texto_para_salvar)
-      puts "✅ Salvo com sucesso!"
+      puts "Salvo com sucesso!"
     end
 
     print "\nPressione ENTER para voltar ao menu..."
@@ -78,11 +79,24 @@ loop do
     gets # Pausa essencial
 
   when "3"
-    puts "\nSaindo do BioStats... Até logo! 👋"
-    break # Encerra o loop e o programa
+    print "\nDigite o nome para buscar: "
+    nome_procurado = gets.chomp
 
+    if nome_procurado.empty?
+      puts "Digite um nome para pesquisar."
+    else
+      system("clear") || system("cls")
+      Escritorio.buscar_por_nome(nome_procurado)
+    end
+
+    print "\nPressione ENTER para voltar ao menu..."
+    gets
+  
+  when "4"
+    puts "\nSaindo do BioStats até logo!"
+    break
   else
-    puts "\n⚠️ Opção inválida! Tente 1, 2 ou 3."
+    puts "\nOpção inválida! Tente 1 a 4."
     sleep(1.5) # Pausa curta automática para o usuário ver o erro
   end
 end

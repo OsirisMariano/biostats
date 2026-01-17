@@ -21,4 +21,31 @@ module Escritorio
       puts "\nNenhum histórico encontrado. Salve um relatório primeiro."
     end
   end
+
+  def self.buscar_por_nome(nome_busca)
+    nome_arquivo = "relatorio.txt"
+    
+    unless File.exist?(nome_arquivo)
+      puts "Arquivo de histórico não encontrado."
+      return
+    end
+
+    conteudo = File.read(nome_arquivo)
+    
+    fichas = conteudo.split("========================================").map(&:strip).reject(&:empty?)
+    
+    # Filtramos apenas as fichas que incluem o nome pesquisado
+    resultados = fichas.select { |ficha| ficha.downcase.include?(nome_busca.downcase) }
+
+    if resultados.any?
+      puts "\n🔍 Encontramos #{resultados.size} registro(s) para '#{nome_busca}':"
+      resultados.each do |resultado|
+        puts "\n" + "="*40
+        puts resultado
+        puts "="*40
+      end
+    else
+      puts "\nNenhum registro encontrado para: '#{nome_busca}'"
+    end
+  end
 end
