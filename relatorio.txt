@@ -1,0 +1,26 @@
+
+========================================
+RELATORIO GERADO EM 12/01/2026 06:55
+
+Nome:           Osiris Mariano
+Tel:            19 999999999
+End:            Jardim do Eden, 01
+--------------------------------------------
+IMC:          24.22 (Peso normal)
+TMB:          1552.5 kcal/dia
+Gasto Real:   2406.38 kcal/dia
+Agua Diária:  2.45 L
+========================================
+
+========================================
+RELATORIO GERADO EM 17/01/2026 08:35
+
+Nome:           Eveline
+Tel:            22 222222222
+End:            Rua 01, 123
+--------------------------------------------
+IMC:          21.48 (Peso normal)
+TMB:          1189.0 kcal/dia
+Gasto Real:   2259.1 kcal/dia
+Agua Diária:  1.93 L
+========================================
