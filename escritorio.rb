@@ -1,7 +1,5 @@
 module Escritorio
   def self.salvar(conteudo)
-    puts "DEBUG: Tentando salvar o arquivo aogra..."
-
     File.open("relatorio.txt", "a") do |arquivo|
       arquivo.puts "\n" + + "="*40
       arquivo.puts "RELATORIO GERADO EM #{Time.now.strftime('%d/%m/%Y %H:%M')}"
@@ -9,6 +7,27 @@ module Escritorio
       arquivo.puts "="*40
     end
   end
+
+  def self.salvar_csv(dados)
+      nome_arquivo = "dados_clientes.csv"
+
+      unless File.exist?(nome_arquivo)
+        File.open(nome_arquivo, "w") do |arquivo|
+          arquivo.puts "Data;Nome;Telefone;IMC;Classificacao;TMB;Gasto_Real;Agua_litros"
+        end
+      end
+
+      File.open(nome_arquivo, "a") do |arquivo|
+        arquivo.puts  "#{Time.now.strftime('%d/%m/%Y %H:%M')};" + 
+                      "#{dados[:nome]};" +
+                      "#{dados[:telefone]};" +
+                      "#{dados[:imc]};" + 
+                      "#{dados[:classificacao]};" + 
+                      "#{dados[:tmb]};" + 
+                      "#{dados[:gasto_real]};" +
+                      "#{dados[:agua]}"
+      end
+    end
 
   def self.ler_historico
     nome_arquivo = "relatorio.txt"
@@ -34,7 +53,6 @@ module Escritorio
     
     fichas = conteudo.split("========================================").map(&:strip).reject(&:empty?)
     
-    # Filtramos apenas as fichas que incluem o nome pesquisado
     resultados = fichas.select { |ficha| ficha.downcase.include?(nome_busca.downcase) }
 
     if resultados.any?
