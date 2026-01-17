@@ -66,7 +66,19 @@ loop do
       TEXTO
 
       Escritorio.salvar(texto_para_salvar)
-      puts "Salvo com sucesso!"
+
+      pacote_para_salvar_csv = {
+        nome: dados_pessoais[:nome],
+        telefone: dados_pessoais[:telefone],
+        imc: valor_imc.round(2),
+        classificacao: classificacao_limpa,
+        tmb: valor_tmb.round(2),
+        gasto_real: gasto_real,
+        agua: info_agua[:litros]
+      }
+      Escritorio.salvar_csv(pacote_para_salvar_csv)
+      puts "--------------------------------------"
+      puts "Salvado em TXT e CSV com sucesso!"
     end
 
     print "\nPressione ENTER para voltar ao menu..."
@@ -96,7 +108,7 @@ loop do
     puts "\nSaindo do BioStats até logo!"
     break
   else
-    puts "\nOpção inválida! Tente 1 a 4."
+    puts "\nOpção inválida! Tente 1 a 3."
     sleep(1.5) # Pausa curta automática para o usuário ver o erro
   end
 end
