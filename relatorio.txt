@@ -1,13 +1,49 @@
 
 ========================================
-RELATORIO GERADO EM 17/01/2026 11:18
+RELATORIO GERADO EM 17/01/2026 11:24
 
-Nome:           osiris
+Nome:           Osiris Mariano
 Tel:            11 111111111
-End:            rua 1.123
+End:            Rua 01,123
 --------------------------------------------
 IMC:          24.22 (Peso normal)
 TMB:          1552.5 kcal/dia
-Gasto Real:   2406.38 kcal/dia
+Gasto Real:   2949.75 kcal/dia
 Agua Diária:  2.45 L
+========================================
+
+========================================
+RELATORIO GERADO EM 19/01/2026 07:53
+Nome:           pele
+Tel:            11 111111111
+End:            Rua 02.123
+--------------------------------------------
+IMC:          23.15 (Peso normal)
+TMB:          1727.75 kcal/dia
+Gasto Real:   2073.3 kcal/dia
+Agua Diária:  2.63 L
+========================================
+
+========================================
+RELATORIO GERADO EM 19/01/2026 07:54
+Nome:           monica
+Tel:            33 333333333
+End:            rua 3, 123
+--------------------------------------------
+IMC:          0.0 (Abaixo do peso)
+TMB:          830.76 kcal/dia
+Gasto Real:   996.91 kcal/dia
+Agua Diária:  0.0 L
+========================================
+
+========================================
+RELATORIO GERADO EM 19/01/2026 07:54
+Nome:           marcia
+Tel:            44 444444444
+End:            rua 04,123
+--------------------------------------------
+IMC:          22.89 (Peso normal)
+TMB:          1280.85 kcal/dia
+Gasto Real:   2433.62 kcal/dia
+Agua Diária:  1.93 L
 ========================================
