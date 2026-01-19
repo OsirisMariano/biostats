@@ -1,6 +1,7 @@
 require_relative 'leitor'
 require_relative 'calculadora'
 require_relative 'escritorio'
+require_relative 'pessoa'
 
 loop do
   # O clear fica aqui para o menu sempre aparecer "do zero"
@@ -29,58 +30,75 @@ loop do
     puts "\nNível de Atividade Física: [1] Sedentario | [2] Moderado | [3] Atleta"
     nivel_atividade = Leitor.ler_texto("Escolha uma opção", ["1", "2", "3"])
 
-    valor_imc     = Calculadora.calcular_imc(peso, altura)
-    classificacao = Calculadora.classificar_imc(valor_imc)
-    valor_tmb     = Calculadora.calcular_tmb(peso, altura, idade, sexo)
-    gasto_real    = Calculadora.calcular_gasto_total(valor_tmb, nivel_atividade)
-    info_agua     = Calculadora.calcular_hidratacao(peso)
+    cliente = Pessoa.new(
+      peso: peso,
+      altura: altura,
+      idade: idade,
+      sexo: sexo,
+      nivel_atividade: nivel_atividade
+    )
+    # valor_imc     = Calculadora.calcular_imc(peso, altura)
+    # classificacao = Calculadora.classificar_imc(valor_imc)
+    # valor_tmb     = Calculadora.calcular_tmb(peso, altura, idade, sexo)
+    # gasto_real    = Calculadora.calcular_gasto_total(valor_tmb, nivel_atividade)
+    # info_agua     = Calculadora.calcular_hidratacao(peso)
 
     # 2. Exibição
     puts "\n" + "="*40
     puts "            RELATÓRIO FINAL            "
     puts "="*40
-    puts "IMC:              #{valor_imc} (#{classificacao})"
-    puts "TMB (Gasto Base): #{valor_tmb.round(2)} kcal/dia"
-    puts "Gasto Real:       #{gasto_real} kcal/dia"
-    puts "Água Diária:      #{info_agua[:litros]}L (~#{info_agua[:copos]} copos de 250ml)"
+    puts "IMC: #{cliente.imc}(#{cliente.classificacao_imc})"
+    puts "TMB (Gasto Base): #{cliente.tmb} kcal/dia"
+    puts "Água Real: #{cliente.gasto_total} kcal/dia"
+    puts "Água Diária: #{cliente.agua_diaria}L"
     puts "="*40
+    
+    # puts "\n" + "="*40
+    # puts "            RELATÓRIO FINAL            "
+    # puts "="*40
+    # puts "IMC:              #{valor_imc} (#{classificacao})"
+    # puts "TMB (Gasto Base): #{valor_tmb.round(2)} kcal/dia"
+    # puts "Gasto Real:       #{gasto_real} kcal/dia"
+    # puts "Água Diária:      #{info_agua[:litros]}L (~#{info_agua[:copos]} copos de 250ml)"
+    # puts "="*40
 
     # 3. Salvamento (Tratado para salvar texto limpo)
     print "\nDeseja salvar o relatório? [S/N]: "
     if gets.chomp.upcase == "S"
       dados_pessoais = Leitor.coletar_dados_pessoais
 
+      cliente.nome      = dados_pessoais[:nome]
+      cliente.telefone  = dados_pessoais[:telefone]
+      cliente.endereco  = dados_pessoais[:endereco]
+
       # Limpa as cores ANSI antes de salvar no TXT
-      classificacao_limpa = classificacao.gsub(/\e\[\d+m/, "").gsub(/\e\[0m/, "")
+      classificacao_limpa = cliente.classificacao_imc.gsub(/\e\[\d+m/, "").gsub(/\e\[0m/, "")
       
       texto_para_salvar = <<~TEXTO
-
-      Nome:           #{dados_pessoais[:nome]}
-      Tel:            #{dados_pessoais[:telefone]}
-      End:            #{dados_pessoais[:endereco]}
+      Nome:           #{cliente.nome}
+      Tel:            #{cliente.telefone}
+      End:            #{cliente.endereco}
       --------------------------------------------
-      IMC:          #{valor_imc} (#{classificacao_limpa})
-      TMB:          #{valor_tmb.round(2)} kcal/dia
-      Gasto Real:   #{gasto_real} kcal/dia
-      Agua Diária:  #{info_agua[:litros]} L
+      IMC:          #{cliente.imc} (#{classificacao_limpa})
+      TMB:          #{cliente.tmb} kcal/dia
+      Gasto Real:   #{cliente.gasto_total} kcal/dia
+      Agua Diária:  #{cliente.agua_diaria} L
       TEXTO
 
       Escritorio.salvar(texto_para_salvar)
 
       pacote_para_salvar_csv = {
-        nome: dados_pessoais[:nome],
-        telefone: dados_pessoais[:telefone],
-        imc: valor_imc.round(2),
+        nome: cliente.nome,
+        telefone: cliente.telefone,
+        imc: cliente.imc,
         classificacao: classificacao_limpa,
-        tmb: valor_tmb.round(2),
-        gasto_real: gasto_real,
-        agua: info_agua[:litros]
+        tmb: cliente.tmb,
+        gasto_real: cliente.gasto_total,
+        agua: cliente.agua_diaria
       }
       Escritorio.salvar_csv(pacote_para_salvar_csv)
-      puts "--------------------------------------"
       puts "Salvado em TXT e CSV com sucesso!"
     end
-
     print "\nPressione ENTER para voltar ao menu..."
     gets # Pausa essencial
 
