@@ -13,7 +13,8 @@ loop do
   puts "[1] Novo Cálculo"
   puts "[2] Ver Histórico"
   puts "[3] Buscar cliente por nome"
-  puts "[4] Sair"
+  puts "[4] Eliminar Cliente"
+  puts "[5] Sair"
   print "\nEscolha uma opção: "
   opcao = gets.chomp
 
@@ -123,10 +124,28 @@ loop do
     gets
   
   when "4"
-    puts "\nSaindo do BioStats até logo!"
-    break
-  else
-    puts "\nOpção inválida! Tente 1 a 3."
-    sleep(1.5) # Pausa curta automática para o usuário ver o erro
-  end
+    print "\nDigite o nome do cliente para ELIMINAR: "
+        nome_procurado = gets.chomp
+
+        unless nome_procurado.empty?
+          print "Tem certeza que deseja apagar os registros de '#{nome_procurado}'? [S/N]: "
+          if gets.chomp.upcase == "S"
+            if Escritorio.eliminar_por_nome(nome_procurado)
+              puts "Registro(s) de '#{nome_procurado}' removido(s) com sucesso!"
+            else
+              puts "Nenhum registro encontrado com esse nome."
+            end
+          else
+            puts "Operação cancelada."
+          end
+        end
+        print "\nPressione ENTER para voltar ao menu..."
+        gets
+      when "5"
+        puts "\nSaindo do BioStats... Até logo!"
+          break
+        else
+          puts "\nOpção inválida! Tente 1 a 5."
+          sleep(1.5)
+  end  
 end
