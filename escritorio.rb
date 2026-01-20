@@ -66,4 +66,42 @@ module Escritorio
       puts "\nNenhum registro encontrado para: '#{nome_busca}'"
     end
   end
+
+  def self.eliminar_por_nome(nome_busca)
+    arquivos = ["relatorio.txt", "dados_clientes.csv"]
+    encontrado = false
+
+    arquivos.each do |nome_arquivo|
+      next unless File.exist?(nome_arquivo)
+      if nome_arquivo.end_with?(".txt")
+        conteudo = File.read(nome_arquivo)
+        fichas = conteudo.split("========================================").map(&:strip).reject(&:empty?)
+
+        novas_fichas = fichas.reject { |ficha| ficha.downcase.include?(nome_busca.downcase) }
+        
+        if fichas.size != novas_fichas.size
+          encontrado = true
+          File.open(nome_arquivo, "w") do |f|
+            novas_fichas.each do |ficha|
+              f.puts "========================================"
+              f.puts ficha
+              f.puts "========================================"
+            end
+          end
+        end
+
+      elsif nome_arquivo.end_with?(".csv")
+        linhas = File.readlines(nome_arquivo)
+        cabecalho = linhas.shift
+
+        novas_linhas = linhas.reject { |linha| linha.downcase.include?(nome_busca.downcase)}
+
+        File.open(nome_arquivo, "w") do |f|
+          f.puts cabecalho
+          f.print novas_linhas.join
+        end
+      end
+    end
+    encontrado
+  end
 end
