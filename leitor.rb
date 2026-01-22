@@ -4,41 +4,44 @@ module Leitor
     loop do
       print "#{mensagem}: "
       entrada = gets.chomp.gsub(',', '.')
+      if entrada.match?(/^\d+(\.\d+)?$/)
+        numero = entrada.to_f
 
-      begin
-        return Float(entrada)
-      rescue ArgumentError
-        puts "\e[31m[Erro]\e[0m Digite um número válido (ex: 75.5)."
-      end    
+        if numero > 0
+          return numero
+        else
+          puts "Erro: O valor deve ser maior que zero."
+        end
+      else
+        puts "Erro: Entrada inválida. Por favor, digite apenas números."
+      end  
     end
   end
 
   # Captura texto com validação de opções
   def self.ler_texto(mensagem, opcoes_validas = nil)
     loop do
-      print "#{mensagem}: "
-      entrada = gets.chomp.strip.upcase
+      print "#{mensagem} #{opcoes_validas}: "
+      entrada = gets.chomp.upcase.strip
 
-      # Se for válido (ou se não houver restrição), retornamos a entrada
-      if opcoes_validas.nil? || opcoes_validas.include?(entrada)
+      if opcoes_validas.nil?
+        return entrada unless entrada.empty?
+        puts "Erro: Este campo não pode ficar vazio."
+      elsif opcoes_validas.include?(entrada)
         return entrada
       else
-        # Se não for válido, avisamos o usuário e o 'loop' faz perguntar de novo
-        puts "\e[31m[Erro]\e[0m Opção inválida. Escolha entre: #{opcoes_validas.join(', ')}"
+        puts "Erro: Opção inválida. Escolha entre #{opcoes_validas}."
       end
     end
   end
 
   def self.coletar_dados_pessoais
-    puts "\n --- CADASTRO DE CLIENTE --- "
-    print "Nome completo: "
-    nome = gets.chomp
-    print "Telefone: "
-    telefone = gets.chomp
-    print "Endereço: "
-    endereco = gets.chomp
+    puts "--- CADASTRO DE DADOS ---"
+    nome = ler_texto("Nome completo")
+    telefone = ler_texto("telefone")
+    endereco = ler_texto("Endereço")
 
-    {nome: nome, telefone: telefone, endereco: endereco}
+    { nome: nome, telefone: telefone, endereco: endereco}  
   end
 end
 
