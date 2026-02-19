@@ -26,3 +26,4 @@ O projeto utiliza o **Ruby 3.x** e as seguintes Gems para uma experiência de us
    ```bash
    git clone [https://github.com/seu-usuario/biostats.git](https://github.com/seu-usuario/biostats.git)
    cd biostats
+![2026-02-18 21-42-01](https://github.com/user-attachments/assets/335489e2-d957-429c-bccb-6b8787afb629)
